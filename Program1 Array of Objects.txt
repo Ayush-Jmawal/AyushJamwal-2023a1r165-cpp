@@ -1,0 +1,60 @@
+/*
+Programs on Array Of Objects:-
+1.Write a program that stores information about 5 students (Name, RegNO, Marks) using an array of object.
+	a. Implement a function display all records.
+	b. Implement a function that search student by Registration number.
+	c. Calculate Percentage of each student.
+	d. Determine grade based on Percentage
+Grade A >= 80%
+Grade B >= 70%
+Grade C >= 60
+Grade D >= 50
+otherwise Fail
+*/
+
+#include <iostream>
+using namespace std;
+class Student {
+public:
+    string name;
+    int regNo;
+    float marks;
+    
+    void input() {
+        cout << "Enter Name, RegNo, Marks: ";
+        cin >> name >> regNo >> marks;
+    }
+    
+    void display() {
+        cout << "Name: " << name << " RegNo: " << regNo << " Marks: " << marks;
+        float perc = marks / 5; // Assuming marks are out of 500
+        cout << " Percentage: " << perc << "% Grade: " << grade(perc) << endl;
+    }
+    
+    char grade(float perc) {
+        return (perc >= 80) ? 'A' : (perc >= 70) ? 'B' : (perc >= 60) ? 'C' : (perc >= 50) ? 'D' : 'F';
+    }
+};
+void searchStudent(Student s[], int n, int reg) {
+    for (int i = 0; i < n; i++) {
+        if (s[i].regNo == reg) {
+            s[i].display();
+            return;
+        }
+    }
+    cout << "Student not found!\n";
+}
+int main() {
+    Student s[5];
+    for (int i = 0; i < 5; i++) s[i].input();
+    
+    cout << "\nAll Students:\n";
+    for (int i = 0; i < 5; i++) s[i].display();
+    
+    int reg;
+    cout << "\nEnter RegNo to search: ";
+    cin >> reg;
+    searchStudent(s, 5, reg);
+    
+    return 0;
+}
